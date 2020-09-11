@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yang.dao.IEmpDao">
+    <resultMap id="empMap" type="com.yang.domain.Emp">
+        <id property="id" column="id"/>
+        <result property="name" column="ename"/>
+        <result property="job_id" column="job_id"/>
+        <result property="mgr_id" column="mgr_id"/>
+        <result property="joindate" column="joindate"/>
+        <result property="salary" column="salary"/>
+        <result property="bonus" column="bonus"/>
+        <result property="dept_id" column="dept_id"/>
+        <association property="dept" column="dept_id" javaType="dept">
+            <id property="id" column="dept_id"/>
+            <result property="dname" column="dname"/>
+            <result property="loc" column="loc"/>
+        </association>
+    </resultMap>
+
+    <sql id="emp">
+        select * from emp
+    </sql>
+
+    <select id="findAll" resultMap="empMap">
+        SELECT
+	        e.*, d.*
+        FROM
+	        emp e, dept	d
+        WHERE
+	        e.dept_id = d.id
+        ORDER BY
+	        e.id;
+    </select>
+
+    <insert id="addEmp" parameterType="com.yang.domain.Emp">
+        INSERT INTO
+            emp(id, ename, job_id, mgr_id, joindate, salary, bonus, dept_id)
+        VALUES
+            (#{id}, #{name}, #{job_id}, #{mgr_id}, #{joindate}, #{salary}, #{bonus}, #{dept_id})
+    </insert>
+
+    <update id="updateEmp" parameterType="com.yang.domain.Emp">
+        update emp set
+            ename = #{name},job_id = #{job_id},mgr_id = #{mgr_id},joindate = #{joindate},salary = #{salary},bonus = #{bonus},dept_id = #{dept_id}
+        where
+            id = #{id}
+    </update>
+
+    <delete id="delEmp" parameterType="java.lang.Integer">
+        delete from emp where id = #{id}
+    </delete>
+
+    <select id="findEmpById" parameterType="java.lang.Integer" resultType="com.yang.domain.Emp">
+        select * from emp where id = #{id}
+    </select>
+
+    <select id="findEmpByName" parameterType="java.lang.String" resultType="emp">
+        select * from emp where ename like #{name}
+    </select>
+
+    <select id="findTotal" resultType="java.lang.Integer">
+        select count(id) from emp
+    </select>
+
+    <select id="findEmpByVo" parameterType="com.yang.domain.QueryVo" resultMap="empMap">
+        select * from emp where ename like #{emp.name}
+    </select>
+
+    <select id="findEmpByCondition" parameterType="emp" resultMap="empMap">
+        select * from emp
+        <where>
+            <if test="name != null">
+                and ename like #{name}
+            </if>
+            <if test="bonus != null">
+                and bonus > #{bonus}
+            </if>
+        </where>
+    </select>
+
+    <select id="findEmpByIds" parameterType="queryvo" resultMap="empMap">
+        <include refid="emp"/>
+        <where>
+            <if test="ids != null and ids.size() > 0">
+                <foreach collection="ids" open="and id in (" close=")" item="id" separator=",">
+                    #{id}
+                </foreach>
+            </if>
+        </where>
+    </select>
+</mapper>
