@@ -4,3 +4,10 @@
 /out/
 
 *.log
+target
+*.iml
+logs
+
+.idea
+
+
