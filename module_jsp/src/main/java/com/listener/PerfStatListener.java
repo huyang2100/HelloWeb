@@ -13,7 +13,7 @@ public class PerfStatListener implements ServletRequestListener {
     @Override
     public void requestInitialized(ServletRequestEvent sre) {
         ServletRequest servletRequest = sre.getServletRequest();
-        servletRequest.setAttribute(KEY_REQUEST_TIME,System.nanoTime());
+        servletRequest.setAttribute(KEY_REQUEST_TIME, System.nanoTime());
     }
 
     @Override
@@ -23,6 +23,6 @@ public class PerfStatListener implements ServletRequestListener {
         long end = System.nanoTime();
         HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
         String requestURI = httpServletRequest.getRequestURI();
-        System.out.println("time taken to execute "+requestURI+": "+((end - start)/1000) + "microseconds");
+        System.out.println(httpServletRequest.getHeader("User-Agent") + "----time taken to execute " + requestURI + ": " + ((end - start) / 1000) + "microseconds");
     }
 }

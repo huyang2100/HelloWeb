@@ -16,7 +16,7 @@ public class SessionListener implements HttpSessionListener, ServletContextListe
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         ServletContext servletContext = sce.getServletContext();
-        servletContext.setAttribute(KEY_USER_COUNTER,new AtomicInteger());
+        servletContext.setAttribute(KEY_USER_COUNTER, new AtomicInteger());
     }
 
     @Override
@@ -30,7 +30,7 @@ public class SessionListener implements HttpSessionListener, ServletContextListe
         ServletContext servletContext = session.getServletContext();
         AtomicInteger userCounter = (AtomicInteger) servletContext.getAttribute(KEY_USER_COUNTER);
         int userCount = userCounter.incrementAndGet();
-        System.out.println("++++++++++ userCount incremented to: "+ userCount);
+        System.out.println("++++++++++ userCount incremented to: " + userCount +"------id: "+session.getId());
     }
 
     @Override
