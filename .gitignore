@@ -1,0 +1,6 @@
+# Project exclude paths
+/module_jsp/target/
+/mybatis_test/target/
+/out/
+
+*.log
