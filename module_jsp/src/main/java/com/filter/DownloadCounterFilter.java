@@ -11,7 +11,7 @@ import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@WebFilter(urlPatterns = "/*")
+@WebFilter(urlPatterns = "/*",asyncSupported = true)
 public class DownloadCounterFilter implements Filter {
     private ExecutorService executorService = Executors.newSingleThreadExecutor();
     private Properties downloadLog;

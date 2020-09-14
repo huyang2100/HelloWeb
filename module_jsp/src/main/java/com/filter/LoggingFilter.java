@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
 
-@WebFilter(urlPatterns = "/*", initParams = {@WebInitParam(name = "logFileName", value = "log.txt"), @WebInitParam(name = "prefix", value = "URI: ")})
+@WebFilter(urlPatterns = "/*", initParams = {@WebInitParam(name = "logFileName", value = "log.txt"), @WebInitParam(name = "prefix", value = "URI: ")},asyncSupported = true)
 public class LoggingFilter implements Filter {
     private PrintWriter logger;
     private String prefix;
