@@ -1,10 +1,15 @@
 package com.bean;
 
-public class Product {
+import java.io.Serializable;
+
+public class Product implements Serializable {
     private int id;
     private String name;
     private String description;
     private float price;
+
+    public Product() {
+    }
 
     public Product(int id, String name, String description, float price) {
         this.id = id;
