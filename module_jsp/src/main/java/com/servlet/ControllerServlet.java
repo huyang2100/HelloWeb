@@ -1,7 +1,7 @@
 package com.servlet;
 
 import com.bean.Product;
-import com.bean.ProductForm;
+import com.form.ProductForm;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

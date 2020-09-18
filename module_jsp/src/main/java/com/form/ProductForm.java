@@ -1,4 +1,4 @@
-package com.bean;
+package com.form;
 
 public class ProductForm {
 

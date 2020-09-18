@@ -18,7 +18,7 @@
 <div id="global">
 
     <form action="product_save.action" method="post">
-        <filedset>
+        <fieldset>
             <legend>添加一个产品</legend>
             <p>
                 <label for="name">名称：</label>
@@ -37,7 +37,7 @@
                 <input type="reset" id="reset" tabindex="4" value="清空">
                 <input type="submit" id="submit" tabindex="5" value="添加">
             </p>
-        </filedset>
+        </fieldset>
     </form>
 </div>
 
