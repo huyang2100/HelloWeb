@@ -10,4 +10,38 @@
     <select id="getEmployeeById" parameterType="int" resultType="employee">
         select * from employees where id = #{id}
     </select>
+
+    <select id="getEmployee" parameterType="map" resultType="employee">
+        select * from employees
+        <where>
+            <if test="salary != null">
+                salary > #{salary}
+            </if>
+            <if test="employee_id != null">
+                and employee_id > #{employee_id}
+            </if>
+        </where>
+
+<!--        <trim prefix="where" prefixOverrides="and | or">-->
+<!--            <if test="salary != null">-->
+<!--                salary > #{salary}-->
+<!--            </if>-->
+<!--            <if test="employee_id != null">-->
+<!--                and employee_id > #{employee_id}-->
+<!--            </if>-->
+<!--        </trim>-->
+    </select>
+
+    <update id="update" parameterType="employee">
+        update employees
+        <set>
+            <if test="first_name != null">
+                first_name = #{first_name} ,
+            </if>
+            <if test="last_name != null">
+                last_name = #{last_name}
+            </if>
+        </set>
+        where employee_id = #{employee_id}
+    </update>
 </mapper>

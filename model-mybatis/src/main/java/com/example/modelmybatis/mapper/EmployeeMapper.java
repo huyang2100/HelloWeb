@@ -4,6 +4,7 @@ import com.example.modelmybatis.pojo.Employee;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Description:
@@ -15,4 +16,8 @@ public interface EmployeeMapper {
     List<Employee> getAll();
 
     Employee getEmployeeById(int eid);
+
+    List<Employee> getEmployee(Map<String,Object> map);
+
+    int update(Map<String,Object> map);
 }
